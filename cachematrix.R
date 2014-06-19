@@ -3,13 +3,14 @@
 
 
 ## Write a short comment describing this function
-  ## Set up a matrix m in a nullspace N(m); The matrix m is defined in NULL space if the following equation is satisfied 
-  ## mx = 0
+  ## Set up a matrix x in a nullspace N(x); Some arbitrary matrix A is defined in NULL space N(A)
+  ## if the following equation is satisfied Ax = 0, where x is set of vectors that satisfy this equation.
   ## Get a value of the matrix
-  ## Set a inverse of the matrix m; if m is a square matrix than solve(m) will return the inverse(m)
-  ## For more general cases ginv(m) is the right solution. Moore-Penrose Generalized Inverse of m
-  ## ginv(m) requires loading the MASS package. 
-
+  ## Set a inverse of the matrix x; if x is a square matrix than solve() will give the inverse(x), denoted as m
+  ## For more general cases ginv(x) is the right solution. Moore-Penrose Generalized Inverse of x
+  ## ginv() requires loading the MASS package. 
+  ## The inverse value of the matrix is deposited in the cache. The operator <<- assign the value of the object in
+  ## environment that is different than the current environment. 
 makeCacheMatrix <- function(x = matrix()) {
 
   m <- NULL
@@ -29,10 +30,11 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-
+## Return a matrix that is the inverse of 'x'. Once the inverse is calculated and stored in cache, cacheSolve function look
+## at the cache and take the inverse value of the matrix from the cache. If the inverse is different than zero, the function 
+## send a message "getting data from cache", and read the value from cache.
 cacheSolve <- function(x, ...) {
-  ## Return a matrix that is the inverse of 'x'
-
+  
   m <- x$getsolve()
   if(!is.null(m)){
     message("getting cached data")
@@ -57,7 +59,7 @@ cacheSolve <- function(x, ...) {
 ## [3,]  0.03531786 -0.01311806 -0.005045409
 ## call b
 ## > b
-## $set
+## >$set
 ## function (y) 
 ## {
 ##  x <<- y
